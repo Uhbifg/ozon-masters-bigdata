@@ -4,6 +4,5 @@ numeric_features = ["if"+str(i) for i in range(1,14)]
 fields = ["id", "label"] + numeric_features
 
 model = Pipeline(steps=[
-    ('preprocessor', preprocessor),
     ('linearregression', LinearRegression())
 ])
