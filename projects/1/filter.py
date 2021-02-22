@@ -6,7 +6,7 @@ from glob import glob
 import logging
 
 sys.path.append('.')
-from model import fields
+from model import fields, fields_to_work
 
 #
 # Init the logger
@@ -29,7 +29,7 @@ if len(filter_cond_files) != 1:
 
 exec(open(filter_cond_files[0]).read())
 
-outfields = fields
+outfields = fields_to_work
 
 for line in sys.stdin:
     # skip header
@@ -37,10 +37,10 @@ for line in sys.stdin:
         continue
 
     #unpack into a tuple/dict
-    values = line.rstrip().split(',')
-    click = dict(zip(fields, values)) 
+    values = line.rstrip().split('\t')
+    click = dict(zip(fields_to_work, values)) 
 
     #apply filter conditions
     if filter_cond(click):
-        output = ",".join([clicl[x] for x in outfields])
+        output = "\t".join([clicl[x] for x in outfields])
         print(output)
