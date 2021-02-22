@@ -16,8 +16,7 @@ fields = ["id", "label"] + numeric_features + categorical_features
 
 
 numeric_transformer = Pipeline(steps=[
-    ('imputer', SimpleImputer(strategy='median')),
-    ('scaler', StandardScaler())
+    ('imputer', SimpleImputer(strategy='median'))
 ])
 
 preprocessor = ColumnTransformer(
@@ -26,9 +25,6 @@ preprocessor = ColumnTransformer(
     ]
 )
 
-model = Pipeline(steps=[
-    ('linearregression', LinearRegression())
-])
 
 model = Pipeline(steps=[
     ('preprocessor', preprocessor),

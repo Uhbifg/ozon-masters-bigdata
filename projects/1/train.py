@@ -33,8 +33,8 @@ except:
 logging.info(f"TRAIN_ID {proj_id}")
 logging.info(f"TRAIN_PATH {train_path}")
 
-read_table_opts = dict(sep=",", names=fields, index_col=False)
-df = pd.read_table(train_path, **read_table_opts, sep="\t", names=fields)
+read_table_opts = dict(sep="\t", names=fields, index_col=False)
+df = pd.read_table(train_path, **read_table_opts)
 # Drop categorical features
 df.drop(axis="columns", columns=categorical_features + ["id"], inplace=True)
 
