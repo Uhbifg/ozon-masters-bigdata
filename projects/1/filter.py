@@ -42,5 +42,5 @@ for line in sys.stdin:
 
     #apply filter conditions
     if filter_cond(click):
-        output = "\t".join([clicl[x] for x in outfields])
+        output = "\t".join([click[x] for x in outfields])
         print(output)
