@@ -32,14 +32,14 @@ exec(open(filter_cond_files[0]).read())
 
 for line in sys.stdin:
     # skip header
-    if line.startswith(fields[0]):
+    if line.rstrip().startswith(fields[0]):
         continue
 
     #unpack into a tuple/dict
     values = line.rstrip().split('\t')
-    test = dict(zip(train_features, values)) 
+    test = dict(zip(fields, values)) 
 
     #apply filter conditions
     if filter_cond(test):
-        test = "\t".join([click[x] for x in train_features])
+        test = "\t".join([test[x] for x in train_features])
         print(test)
