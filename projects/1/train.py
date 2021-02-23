@@ -10,7 +10,7 @@ from joblib import dump
 #
 # Import model definition
 #
-from model import model, fields, categorical_features
+from model import model, fields, model_features
 
 
 #
@@ -35,10 +35,8 @@ logging.info(f"TRAIN_PATH {train_path}")
 
 read_table_opts = dict(sep="\t", names=fields, index_col=False)
 df = pd.read_table(train_path, **read_table_opts)
-# Drop categorical features
-df.drop(axis="columns", columns=categorical_features + ["id"], inplace=True)
 
-X_train = df.iloc[:, 1:]
+X_train = df[model_features]
 y_train = df.iloc[:, 0]
 
 model.fit(X_train, y_train)

@@ -12,9 +12,10 @@ categorical_features = ["cf"+str(i) for i in range(1,27)] + ["day_number"]
 
 fields = ["id", "label"] + numeric_features + categorical_features
 
-fields_to_work = ["id"] + numeric_features
 
+model_features = numeric_features
 
+train_features = ["id"] + numeric_features + categorical_features
 
 numeric_transformer = Pipeline(steps=[
     ('imputer', SimpleImputer(strategy='median'))
