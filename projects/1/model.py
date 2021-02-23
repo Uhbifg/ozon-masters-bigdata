@@ -15,7 +15,7 @@ fields = ["id", "label"] + numeric_features + categorical_features
 
 model_features = numeric_features
 
-train_features = ["id"] + numeric_features + categorical_features
+train_features = ["id"] + numeric_features + ["cf"+str(i) for i in range(1,27)]
 
 numeric_transformer = Pipeline(steps=[
     ('imputer', SimpleImputer(strategy='median'))
