@@ -2,7 +2,7 @@ from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
 from sklearn.impute import SimpleImputer
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
-from sklearn.linear_model import LinearRegression
+from sklearn.linear_model import LinearRegression, LogisticRegression
 from sklearn.model_selection import train_test_split, GridSearchCV
 
 
@@ -30,6 +30,6 @@ preprocessor = ColumnTransformer(
 
 model = Pipeline(steps=[
     ('preprocessor', preprocessor),
-    ('linearregression', LinearRegression())
+    ('linearregression', LogisticRegression())
 ])
 
