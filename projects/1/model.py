@@ -29,7 +29,7 @@ preprocessor = ColumnTransformer(
 
 
 model = Pipeline(steps=[
-    # ('preprocessor', preprocessor),
+    ('preprocessor', preprocessor),
     ('linearregression', LinearRegression())
 ])
 
