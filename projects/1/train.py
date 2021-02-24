@@ -38,7 +38,7 @@ read_table_opts = dict(sep="\t", names=fields, index_col=False)
 df = pd.read_table(train_path, **read_table_opts)
 
 X_train = df[model_features]
-y_train = df.iloc[:, 0]
+y_train = df.label
 
 model.fit(X_train, y_train)
 
