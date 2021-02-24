@@ -37,11 +37,11 @@ for line in sys.stdin:
 
     #unpack into a tuple/dict
     values = line.rstrip().split('\t')
-    test = dict(zip(fields, values)) 
+    test = dict(zip(train_features, values)) 
     
     #apply filter conditions
     if filter_cond(test):
         test = "\t".join([test[x] for x in train_features])
-        logging.info(test)
+        #logging.info(test)
         sys.exit(1)
         print(test)
