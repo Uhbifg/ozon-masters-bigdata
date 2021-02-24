@@ -43,5 +43,5 @@ for line in sys.stdin:
     if filter_cond(test):
         test = "\t".join([test[x] for x in train_features])
         #logging.info(test)
-        sys.exit(1)
+        #sys.exit(1)
         print(test)
