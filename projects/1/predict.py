@@ -6,7 +6,7 @@ from joblib import load
 import pandas as pd
 
 sys.path.append('.')
-from model import fields, train_features
+from model import fields, train_features, model_features
 
 #
 # Init the logger
