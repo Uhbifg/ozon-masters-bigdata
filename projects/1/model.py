@@ -30,6 +30,6 @@ preprocessor = ColumnTransformer(
 
 model = Pipeline(steps=[
     ('preprocessor', preprocessor),
-    ('linearregression', CatBoostRegressor(loss_function = "Logloss", learning_rate=0.01, early_stopping_rounds=1000, iterations=10000))
+    ('linearregression', CatBoostRegressor(loss_function = "RMSE", learning_rate=0.01, early_stopping_rounds=1000, eval_metric="Logloss", iterations=10000))
 ])
 
