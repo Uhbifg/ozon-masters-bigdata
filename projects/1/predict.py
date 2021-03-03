@@ -6,7 +6,7 @@ from joblib import load
 import pandas as pd
 
 sys.path.append('.')
-from model import fields
+from model import fields, train_features, model_features
 
 #
 # Init the logger
@@ -20,11 +20,13 @@ logging.info("ARGS {}".format(sys.argv[1:]))
 model = load("1.joblib")
 
 read_opts=dict(
-        sep=',', names=fields, index_col=False, header=None,
+        sep='\t', names=train_features, index_col=False, header=None,
         iterator=True, chunksize=100
 )
 
-for df in pd.read_csv(sys.stdin, **read_opts, sep='\t'):
-    pred = model.predict(df)
-    out = zip(df.doc_id, pred)
-    print("\n".join(["{0},{1}".format(*i) for i in out]))
+
+for df in pd.read_csv(sys.stdin, **read_opts):
+    X_test = df[model_features]
+    pred = model.predict(X_test)
+    out = zip(df.id, pred)
+    print("\n".join(["{0}\t{1}".format(*i) for i in out]))

@@ -3,6 +3,7 @@
 import os, sys
 import logging
 
+
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from joblib import dump
@@ -10,7 +11,7 @@ from joblib import dump
 #
 # Import model definition
 #
-from model import model, fields
+from model import model, fields, model_features
 
 
 #
@@ -33,10 +34,11 @@ except:
 logging.info(f"TRAIN_ID {proj_id}")
 logging.info(f"TRAIN_PATH {train_path}")
 
-read_table_opts = dict(sep=",", names=fields, index_col=False)
+read_table_opts = dict(sep="\t", names=fields, index_col=False)
 df = pd.read_table(train_path, **read_table_opts)
 
-X_train, y_train = df.iloc[:,:-1], df.iloc[:,-1]
+X_train = df[model_features]
+y_train = df.label
 
 model.fit(X_train, y_train)
 
