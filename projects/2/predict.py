@@ -26,7 +26,8 @@ read_opts=dict(
 
 
 for df in pd.read_csv(sys.stdin, **read_opts):
-    X_test = df[model_features]
+    df.replace({'\N': None}, inplace=True)
+    X_test = df[model_features].astype('Int64', copy=False)
     pred = model.predict(X_test)
     out = zip(df.id, pred)
     print("\n".join(["{0}\t{1}".format(*i) for i in out]))
