@@ -1,0 +1,1 @@
+INSERT OVERWRITE TABLE hw2_pred SELECT TRANSFORM item  USING 'predict.py' AS (id, predict) FROM (SELECT * from hw2_test where if1 in (20, 40));

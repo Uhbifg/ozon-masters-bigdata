@@ -1,0 +1,1 @@
+INSERT OVERWRITE DIRECTORY 'Uhbifg_hiveout' SELECT * FROM hw2_pred;
