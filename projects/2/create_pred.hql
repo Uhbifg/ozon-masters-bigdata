@@ -3,4 +3,4 @@ create table hw2_pred(
     y  FLOAT)
     ROW FORMAT DELIMITED
     FIELDS TERMINATED BY '\t'
-    location Uhbifg_hw2_pred;
+    location 'Uhbifg_hw2_pred';
