@@ -43,6 +43,7 @@ CREATE TEMPORARY EXTERNAL TABLE hw2_test (
     ROW FORMAT DELIMITED
     FIELDS TERMINATED BY '\t'
     STORED AS TEXTFILE
-    tblproperties ("skip.header.line.count"="1")
-    LOCATION '/datasets/criteo_test_large_features';
+    LOCATION '/datasets/criteo_test_large_features'
+    tblproperties ("skip.header.line.count"="1");
+    
     
