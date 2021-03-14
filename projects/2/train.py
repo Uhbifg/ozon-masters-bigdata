@@ -42,4 +42,4 @@ y_train = df.label
 
 model.fit(X_train, y_train)
 
-dump(model, "{}.joblib".format(proj_id))
+dump(model, "2.joblib")
