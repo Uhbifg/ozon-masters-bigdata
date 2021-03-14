@@ -1,4 +1,4 @@
-create table hw2_pred(
+create table hw2_pred_1(
     id INT,
     y  FLOAT)
     ROW FORMAT DELIMITED

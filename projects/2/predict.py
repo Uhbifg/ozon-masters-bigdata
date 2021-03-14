@@ -1,4 +1,4 @@
-#!/opt/conda/envs/dsenv/bin/python
+#!/opt/conda/envs/dsenv/bin/python3
 
 import sys, os
 import logging
@@ -21,12 +21,11 @@ model = load("2.joblib")
 
 read_opts=dict(
         sep='\t', names=train_features, index_col=False, header=None,
-        iterator=True, chunksize=100
+        iterator=True, chunksize=100, na_values='\\N'
 )
 
 
 for df in pd.read_csv(sys.stdin, **read_opts):
-    df.replace({'\N': None}, inplace=True)
     X_test = df[model_features].astype('Int64', copy=False)
     pred = model.predict(X_test)
     out = zip(df.id, pred)
