@@ -1,18 +1,18 @@
 CREATE TEMPORARY EXTERNAL TABLE hw2_test (
-    id  INT,
-    if1 INT,
-    if2 INT,
-    if3 INT,
-    if4 INT,
-    if5 INT,
-    if6 INT,
-    if7 INT,
-    if8 INT,
-    if9 INT,
-    if10 INT,
-    if11 INT,
-    if12 INT,
-    if13 INT, 
+    id  string,
+    if1 string,
+    if2 string,
+    if3 string,
+    if4 string,
+    if5 string,
+    if6 string,
+    if7 string,
+    if8 string,
+    if9 string,
+    if10 string,
+    if11 string,
+    if12 string,
+    if13 string, 
     cf1 string,
     cf2 string,
     cf3 string,
@@ -39,11 +39,10 @@ CREATE TEMPORARY EXTERNAL TABLE hw2_test (
     cf24 string,
     cf25 string,
     cf26 string,
-    day_number INT)
+    day_number string)
     ROW FORMAT DELIMITED
     FIELDS TERMINATED BY '\t'
     STORED AS TEXTFILE
-    LOCATION '/datasets/criteo_test_large_features'
-    tblproperties ("skip.header.line.count"="1");
+    LOCATION '/datasets/criteo_test_large_features';
     
     
