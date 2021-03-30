@@ -38,11 +38,10 @@ while True:
         rdd2 = pathes.map(lambda x : x[0], preservesPartitioning=True).distinct().collect()
         neigbours = dict() 
         for i in rdd2:
-            neigbours[i] = w[i]
+            neigbours[i] = w.get(i, [])
         pathes = sc.parallelize(pathes.flatMap(lambda x : search(x[0], x[1], neigbours, seen), preservesPartitioning=True).collect())
         seen.update(pathes.map(lambda x : x[0]).distinct().collect())
 ans = ans.map(lambda x : x[1])
-
 
 def toCSVLine(data):
     return ','.join(str(d) for d in data)
