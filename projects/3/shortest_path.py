@@ -6,7 +6,7 @@ from pyspark import SparkContext, SparkConf
 conf = SparkConf()
 sc = SparkContext(appName="hw_3_Uhbifg", conf=conf)
 os.environ["PYTHONHASHSEED"] = "42"
-start_node = 1sys.argv[1]
+start_node = sys.argv[1]
 end_node = sys.argv[2]
 path_data = sys.argv[3]
 path_ans = sys.argv[4]
