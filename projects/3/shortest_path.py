@@ -33,7 +33,7 @@ num = 0
 max_l = 100
 while True:
     if num == max_l:
-        ans = sc.parralelize([])
+        ans = sc.parallelize([])
         break
     num += 1
     ans = pathes.filter(lambda x : x[0] == end_node)
