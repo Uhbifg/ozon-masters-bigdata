@@ -48,6 +48,5 @@ def toCSVLine(data):
     return ','.join(str(d) for d in data)
 
 lines = ans.map(toCSVLine)
-lines.saveAsTextFile(path_ans)
-
+lines.coalesce(1).saveAsTextFile(path_ans)
 sc.stop()
