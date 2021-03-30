@@ -29,13 +29,10 @@ links = graph.groupByKey().mapValues(list).cache()
 answers = []
 pathes = sc.parallelize([(start_node, [start_node])])
 seen = set([start_node])
-num = 0
-max_l = 100
 while True:
-    if num == max_l:
+    if pathes.count() == 0:
         ans = sc.parallelize([])
         break
-    num += 1
     ans = pathes.filter(lambda x : x[0] == end_node)
     if ans.count() > 0:
         break
