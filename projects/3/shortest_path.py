@@ -15,11 +15,13 @@ raw_graph = sc.textFile(path_data)
 graph = raw_graph.map(lambda x: map(int, x.split("\t")[::-1])).cache()
 links = graph.groupByKey().mapValues(list).cache()     
 
-def search(x1, x2, x3):
+w = dict(links.collect())
+def search(x1, x2, x3, seen):
     ans = list()
     a = x3[x1]
     for i in a:
-        ans.append(tuple([i, x2 + [i]]))
+        if i not in seen:
+            ans.append(tuple([i, x2 + [i]]))
     return ans
 
 
@@ -36,14 +38,11 @@ while True:
         rdd2 = pathes.map(lambda x : x[0], preservesPartitioning=True).distinct().collect()
         neigbours = dict() 
         for i in rdd2:
-            temp = links.lookup(i)
-            if len(temp) > 0:
-                neigbours[i] = temp[0]
-            else:
-                neigbours[i] = []
-        pathes = sc.parallelize(pathes.flatMap(lambda x : search(x[0], x[1], neigbours), preservesPartitioning=True).filter(lambda x : x[0] not in seen).collect())
-        seen.update(pathes.map(lambda x : x[0]).collect())
+            neigbours[i] = w[i]
+        pathes = sc.parallelize(pathes.flatMap(lambda x : search(x[0], x[1], neigbours, seen), preservesPartitioning=True).collect())
+        seen.update(pathes.map(lambda x : x[0]).distinct().collect())
 ans = ans.map(lambda x : x[1])
+
 
 def toCSVLine(data):
     return ','.join(str(d) for d in data)
