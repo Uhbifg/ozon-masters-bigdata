@@ -29,8 +29,13 @@ links = graph.groupByKey().mapValues(list).cache()
 answers = []
 pathes = sc.parallelize([(start_node, [start_node])])
 seen = set([start_node])
-
+num = 0
+max_l = 100
 while True:
+    if num == max_l:
+        ans = sc.parralelize([])
+        break
+    num += 1
     ans = pathes.filter(lambda x : x[0] == end_node)
     if ans.count() > 0:
         break
@@ -42,7 +47,6 @@ while True:
         pathes = sc.parallelize(pathes.flatMap(lambda x : search(x[0], x[1], neigbours, seen), preservesPartitioning=True).collect())
         seen.update(pathes.map(lambda x : x[0]).distinct().collect())
 ans = ans.map(lambda x : x[1])
-
 def toCSVLine(data):
     return ','.join(str(d) for d in data)
 
