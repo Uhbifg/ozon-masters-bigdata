@@ -26,14 +26,14 @@ def search(x1, x2, x3):
 links = graph.groupByKey().mapValues(list).cache()     
 answers = []
 pathes = sc.parallelize([(start_node, [start_node])])
-
+seen = set([start_node])
 
 while True:
     ans = pathes.filter(lambda x : x[0] == end_node)
     if ans.count() > 0:
         break
     else:
-        rdd2 = pathes.map(lambda x : x[0]).distinct().collect()
+        rdd2 = pathes.map(lambda x : x[0], preservesPartitioning=True).distinct().collect()
         neigbours = dict() 
         for i in rdd2:
             temp = links.lookup(i)
@@ -41,9 +41,8 @@ while True:
                 neigbours[i] = temp[0]
             else:
                 neigbours[i] = []
-        rdd3 = sc.parallelize(pathes.flatMap(lambda x : search(x[0], x[1], neigbours)).filter(lambda x : 
-                                                                                             len(x[1]) == len(set(x[1]))).collect())
-        pathes = rdd3
+        pathes = sc.parallelize(pathes.flatMap(lambda x : search(x[0], x[1], neigbours), preservesPartitioning=True).filter(lambda x : x[0] not in seen).collect())
+        seen.update(pathes.map(lambda x : x[0]).collect())
 ans = ans.map(lambda x : x[1])
 
 def toCSVLine(data):
