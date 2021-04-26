@@ -28,7 +28,9 @@ schema = StructType([
     StructField("unixReviewTime", StringType())
 ])
 
+
 dataset = spark.read.json(train_path, schema=schema)
 dataset.cache()
+model = pipline.fit(dataset)
 model.write().overwrite().save(model_path)
 spark.stop()

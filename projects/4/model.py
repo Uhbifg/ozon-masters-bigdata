@@ -11,7 +11,7 @@ swr = StopWordsRemover(inputCol=tokenizer.getOutputCol(), outputCol="words_filte
 
 hasher = HashingTF(numFeatures=1000, binary=True, inputCol=swr.getOutputCol(), outputCol="word_vector")
 
-lr = LogisticRegression(featuresCol=hasher.getOutputCol(), labelCol="overall ", maxIter=100)
+lr = LogisticRegression(featuresCol=hasher.getOutputCol(), labelCol="overall", maxIter=100)
 
 pipeline = Pipeline(stages=[
     tokenizer,
