@@ -32,5 +32,5 @@ schema = StructType([
 model = PipelineModel.load(model_path)
 test = spark.read.json(test_path, schema=schema)
 y = model.transform(test)
-predictions.select("id", "y").write.save(y_path)
+predictions.select("id", "prediction").write.save(y_path)
 spark.stop()
