@@ -30,5 +30,5 @@ schema = StructType([
 
 dataset = spark.read.json(train_path, schema=schema)
 dataset.cache()
-pipeline_model.write().overwrite().save(model_path)
+model.write().overwrite().save(model_path)
 spark.stop()
