@@ -1,0 +1,10 @@
+name: My Project
+
+conda_env: dsenv.yaml
+
+entry_points:
+  main:
+    parameters:
+      data_file: path
+      seed: {type: int, default: 42}
+    command: "python train.py -r {seed} {data_file}"
