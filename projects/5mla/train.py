@@ -8,7 +8,7 @@ from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
 import pandas as pd
 
-from catboost import CatBoostRegressor
+from catboost import CatBoostClassifier
 
 if __name__ == "__main__":
     try:
@@ -34,7 +34,7 @@ if __name__ == "__main__":
     #df = df.applymap(str)
     with mlflow.start_run():
 
-        model = CatBoostRegressor(random_seed=model_param, iterations=1)
+        model = CatBoostClassifier(random_seed=model_param, iterations=1)
         model.fit(X=X_train, y=y_train, cat_features=categorical_features)
         y_proba = model.predict(X_train)
         loss = log_loss(y_train, y_proba)
