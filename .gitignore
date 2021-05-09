@@ -128,4 +128,5 @@ dmypy.json
 
 1.joblib
 # Mlrund ignore 
-mlruns, *.sqlite
+mlruns
+*.sqlite
