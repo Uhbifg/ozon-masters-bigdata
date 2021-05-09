@@ -5,6 +5,6 @@ conda_env: dsenv.yaml
 entry_points:
   main:
     parameters:
-      data_file: path
+      train_path: path
       seed: {type: int, default: 42}
-    command: "python train.py -r {seed} {data_file}"
+    command: "python train.py -r {seed} {train_path}"
