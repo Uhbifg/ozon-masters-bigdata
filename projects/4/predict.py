@@ -4,11 +4,11 @@ import logging
 
 from pyspark.sql import SparkSession
 from pyspark.sql.types import *
+from pyspark.ml import Pipeline, PipelineModel
 
 spark = SparkSession.builder.getOrCreate()
 spark.sparkContext.setLogLevel('WARN')
 
-from pyspark.ml import Pipeline, PipelineModel
 
 
 model_path = sys.argv[1]

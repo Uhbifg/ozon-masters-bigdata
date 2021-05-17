@@ -1,0 +1,16 @@
+name: My Project
+
+entry_points:
+  main:
+    parameters:
+      train_path_in: {type:string, default:None}
+      sklearn_model: {type: string, default:None}
+      model_param1: {type: int, default:42}
+    command: "python train.py {train_path_in} {sklearn_model} {model_param1}"
+  etl_predict:
+    parameters:
+      test_path_in: {type:string, default:None}
+      predict_path_out: {type: string, default:None}
+      sklearn_model: {type: int, default:42}
+      model_version: {type: string, defaul:0}
+    command: "python etl_predict.py {test_path_in} {predict_path_out} {sklearn_model} {model_version}"
