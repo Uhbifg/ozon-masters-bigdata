@@ -33,6 +33,7 @@ if __name__ == "__main__":
     X_test = pd.read_pickle("test.pickle")
     X_test.verified["verified"].map({"true" : 1, "false" : 0})
     X_test.fillna(0)
+    X_test = X_test.astype(float)
     spark_df = spark.CreateDataFrame(X_test)
     model = mlflow.pyfunc.spark_udf(spark, "models:/{}/{}".format(model_name, model_ver))
     cols = spark_df.select("vote", "verified").schema.fieldNames()

@@ -3,9 +3,9 @@ name: My Project
 entry_points:
   main:
     parameters:
-      train_path_in: {type:string, default:None}
-      sklearn_model: {type: string, default:None}
-      model_param1: {type: int, default:42}
+      train_path_in: {type:string, default: None}
+      sklearn_model: {type: string, default: None}
+      model_param1: {type: int, default: 42}
     command: "python train.py {train_path_in} {sklearn_model} {model_param1}"
   etl_predict:
     parameters:

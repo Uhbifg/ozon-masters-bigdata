@@ -22,6 +22,7 @@ if __name__ == "__main__":
     except:
         logging.critical("Need to pass both project_id and train dataset path")
         sys.exit(1)
-    with mlflow.start_run() as run:
-        os.system("etl.py {} {} {}".format(train_path_in, "test", 0))
-        os.system("predict.py {} {} {} {}".format("test", sklearn_model, model_version, predict_path_out))
+    with mlflow.start_run():
+        run = mlflow.active_run()
+        os.system("/opt/conda/envs/dsenv/bin/python etl.py {} {} {}".format(train_path_in, "test", 0))
+        os.system("/opt/conda/envs/dsenv/bin/python predict.py {} {} {} {}".format("test", sklearn_model, model_version, predict_path_out))

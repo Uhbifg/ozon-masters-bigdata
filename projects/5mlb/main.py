@@ -1,20 +1,6 @@
-from sklearn.metrics import accuracy_score, log_loss
-from sklearn import preprocessing
-from sklearn.linear_model import LogisticRegression
 import os, sys
 import logging
 import mlflow
-from sklearn.compose import ColumnTransformer
-from sklearn.pipeline import Pipeline
-import pandas as pd
-from pyspark.sql import SparkSession
-from pyspark.sql.types import *
-from pyspark.ml import Pipeline, PipelineModel
-from sklearn.svm import LinearSVC
-from pyspark.sql import SparkSession
-from pyspark.sql.types import *
-from pyspark.ml import Pipeline, PipelineModel
-
 
 if __name__ == "__main__":
     spark = SparkSession.builder.getOrCreate()
@@ -26,7 +12,10 @@ if __name__ == "__main__":
     except:
         logging.critical("Need to pass both project_id and train dataset path")
         sys.exit(1)
-    with mlflow.start_run() as run:
-        os.system("etl.py {} {} {}".format(train_path_in, "train", 1))
-        os.system("train.py {} {} {} {}".format("train", model_name, model_param, run.info.run_id))
+    with mlflow.start_run():
+        run = mlflow.active_run()
+        
+        logging.critical(run.info.run_id)
+        os.system("/opt/conda/envs/dsenv/bin/python3 etl.py {} {} {}".format(train_path_in, "train", 1))
+        os.system("/opt/conda/envs/dsenv/bin/python train.py {} {} {} {}".format("train", model_name, model_param, run.info.run_id))
       
